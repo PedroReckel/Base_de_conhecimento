@@ -7,6 +7,7 @@ app.db = db
 
 consing()
     .then('./config/middlewares.js') // O consing vai ser responsavel por colocar os nossos metodos e API tudo dentro de APP
+    .then('./api/validation.js')
     .then('./api')
     .then('./config/routes.js')
     .into(app) // Injetar como parametro o APP em cada uma das dependencias
