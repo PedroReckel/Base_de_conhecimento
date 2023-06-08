@@ -13,7 +13,6 @@ module.exports = app => {
 
     // Cuidado com ordem! Tem que vir antes de /categories/:id    
     // É necessário sempre colocar as URL's mais expercificas mais em cima e as URL's mais genericas em baixo
-
     app.route('/categories/tree')
         .get(app.api.category.getTree)
 
@@ -21,4 +20,13 @@ module.exports = app => {
         .get(app.api.category.getById)
         .put(app.api.category.save)
         .delete(app.api.category.remove)
+
+    app.route('/articles')
+        .get(app.api.article.get)
+        .post(app.api.article.save)
+
+    app.route('/articles/:id')
+        .get(app.api.article.getById)
+        .put(app.api.article.save)
+        .delete(app.api.article.remove)
 }
