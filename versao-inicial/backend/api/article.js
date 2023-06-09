@@ -1,7 +1,7 @@
 /* API de artigo */
 
 module.exports = app => {
-    const { existsOrError, notExistsOrError } = app.api.validation
+    const { existsOrError } = app.api.validation
 
     const save = (req, res) => {
         const article = { ...req.body }
@@ -26,16 +26,21 @@ module.exports = app => {
         } else {
             app.db('articles')
                 .insert(article)
-                .then(_ => res.send(204).send())
+                .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         }
-    } 
+    }
 
     const remove = async (req, res) => {
         try {
             const rowsDeleted = await app.db('articles')
                 .where({ id: req.params.id }).del()
-            notExistsOrError(rowsDeleted, 'Artigo não foi encontrado.')
+            
+            try {
+                existsOrError(rowsDeleted, 'Artigo não foi encontrado.')
+            } catch(msg) {
+                return res.status(400).send(msg)    
+            }
 
             res.status(204).send()
         } catch(msg) {
@@ -48,7 +53,7 @@ module.exports = app => {
         const page = req.query.page || 1 // Caso essa atributo não esteja setado eu vou exibir a pagina 1
 
         const result = await app.db('articles').count('id').first() // É importante ter o COUNT para que eu consiga definir quantas paginas vão ser definidas a partir da quantidade por pagina
-        const count = parent(result.count)
+        const count = parseInt(result.count)
 
         app.db('articles')
             .select('id', 'name', 'description')
