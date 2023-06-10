@@ -1,4 +1,5 @@
 /* API de artigo */
+const queries = require('./queries')
 
 module.exports = app => {
     const { existsOrError } = app.api.validation
@@ -73,6 +74,22 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-return { save, remove, get, getById }
+    const getByCategory = async (req, res) => {
+        const categoryId = req.params.id
+        const page = req.query.page || 1  
+        const categories = await app.db.raw(queries.categoryWithChildren, categoryId) // Pegar todos os artigos que pertecem a categoria que foi informada e os filhos
+        const ids = categories.rows.map(c => c.id) // Cria uma array com todos os ID's de categorias
+
+        app.db({a: 'articles', u: 'users'}) // Fazendo um "Inner join" usando o KNEX
+            .select('a.id', 'a.name', 'a.description', 'a.imageUrl', { author: 'u.name' })
+            .limit(limit).offset(page * limit - limit)
+            .whereRaw('?? = ??', ['u.id', 'a.userId']) // Campos comuns as duas tabelas
+            .whereIn('categoryId', ids)
+            .orderBy('a.id', 'desc')
+            .then(articles => res.json(articles))
+            .catch(err => res.status(500).send(err))
+    }
+ 
+return { save, remove, get, getById, getByCategory }
 
 }

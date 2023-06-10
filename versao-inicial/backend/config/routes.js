@@ -1,4 +1,9 @@
 module.exports = app => {
+    // Essas 3 URL's abaixo são as unicas que são publicas
+    app.post('/singup', app.api.user.save)
+    app.post('/singin', app.api.auth.singin)
+    app.post('/validateToken', app.api.auth.validateToken)
+
     app.route('/users')
         .post(app.api.user.save)
         .get(app.api.user.get)
@@ -29,4 +34,7 @@ module.exports = app => {
         .get(app.api.article.getById)
         .put(app.api.article.save)
         .delete(app.api.article.remove)
+
+    app.route('/categories/:id/articles')
+        .get(app.api.article.getByCategory)
 }
