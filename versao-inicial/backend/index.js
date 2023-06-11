@@ -6,6 +6,7 @@ const db = require('./config/db')
 app.db = db
 
 consing()
+    .include('./config/passport.js')
     .then('./config/middlewares.js') // O consing vai ser responsavel por colocar os nossos metodos e API tudo dentro de APP
     .then('./api/validation.js')
     .then('./api')
