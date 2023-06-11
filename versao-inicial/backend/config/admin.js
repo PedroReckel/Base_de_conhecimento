@@ -1,3 +1,5 @@
+/* Vai validar se o usuário é admin ou não */
+
 module.exports = middleware => {
     return (req, res, next) => {
         if(req.user.admin) {
