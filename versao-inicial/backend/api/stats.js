@@ -1,4 +1,4 @@
-/* Modelo tempo informações de usuários, categoria e artigos e também a data de criação */
+/* Modelo tendo informações de usuários, categoria e artigos e também a data de criação */
 
 module.exports = app => {
     const Stat = app.mongoose.model('Stat', {

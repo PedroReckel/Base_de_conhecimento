@@ -75,10 +75,10 @@ module.exports = app => {
     }
 
     const getByCategory = async (req, res) => {
-        const categoryId = req.params.id
+        const categoryId = req.params.id // Id da categoria pai
         const page = req.query.page || 1  
         const categories = await app.db.raw(queries.categoryWithChildren, categoryId) // Pegar todos os artigos que pertecem a categoria que foi informada e os filhos
-        const ids = categories.rows.map(c => c.id) // Cria uma array com todos os ID's de categorias
+        const ids = categories.rows.map(c => c.id) // Cria uma array com todos os ID's de categorias // Id das categorias filhas
 
         app.db({a: 'articles', u: 'users'}) // Fazendo um "Inner join" usando o KNEX
             .select('a.id', 'a.name', 'a.description', 'a.imageUrl', { author: 'u.name' })
