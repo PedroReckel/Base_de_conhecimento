@@ -1,24 +1,23 @@
 <template>
-    <footer class="footer">
-        <span>Copyright <strong>Cod3r</strong> © 2015-2018</span>
+	<footer class="footer">
+        <span>Copyright <strong>Pedro Reckel Roberte</strong> © 2023</span>
     </footer>
 </template>
 
 <script>
 export default {
-    name: "Footer"
+	name: "Footer",
 }
 </script>
 
 <style>
     .footer {
         grid-area: footer;
-        background-color: #DDD;
-        color: #333;
-
+        background: #DDD;
+        
         display: flex;
-        align-items: center;
         justify-content: flex-end;
+        align-items: center;
         padding-right: 10px;
     }
 </style>
