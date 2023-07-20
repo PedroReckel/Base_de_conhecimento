@@ -49,7 +49,7 @@ module.exports = app => {
         }
     }
 
-    const limit = 10 // Limitar quantos artigos eu vou mandar em cada uma das paginas (Nesse caso quero no máximo 10 registros) // Usado para paginação
+    const limit = 3 // Limitar quantos artigos eu vou mandar em cada uma das paginas (Nesse caso quero no máximo 10 registros) // Usado para paginação
     const get = async (req, res) => {
         const page = req.query.page || 1 // Caso essa atributo não esteja setado eu vou exibir a pagina 1
 
