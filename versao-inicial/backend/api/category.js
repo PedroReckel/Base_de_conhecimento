@@ -95,7 +95,7 @@ module.exports = app => {
 
     const getById = (req, res) => {
         app.db('categories')
-            .then({ id: req.params.id })
+            .where({ id: req.params.id })
             .first()
             .then(category => res.json(category))
             .catch(err => res.status(500).send(err))
