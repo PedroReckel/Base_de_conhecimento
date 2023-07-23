@@ -106,7 +106,7 @@ module.exports = app => {
         if(!tree) tree = categories.filter(c => !c.parentId) // Filtrar apenas as categorias que não tem o parentId setado 
         tree = tree.map(parentNode => {  // Encontrar quais são os filhos desse nó especifico
             const isChild = node => node.parentId == parentNode.id  
-            parentNode.childrem = toTree(categories, categories.filter(isChild)) // Para as proximas subcategorias
+            parentNode.children = toTree(categories, categories.filter(isChild)) // Para as proximas subcategorias
             return parentNode
         })
         return tree
