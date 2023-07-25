@@ -1,9 +1,9 @@
 <template>
-	<div id="app" :class="{'hide-menu': !isMenuVisible}"> <!-- Se o menu não estiver visivel eu vou aplicar essa classe CSS -->
+	<div id="app" :class="{'hide-menu': !isMenuVisible || !user}"> <!-- Se o menu não estiver visivel ou se o usuário não estiver setado eu vou aplicar essa classe CSS -->
 		<Header title="Grupo SEI - Base de Conhecimento" 
-			:hideToggle="false"
-			:hideUserDropdown="false"></Header>
-		<Menu></Menu>
+			:hideToggle="!user"
+			:hideUserDropdown="!user"></Header>
+		<Menu v-if="user"></Menu>
 		<Content></Content>
 		<Footer></Footer>
 	</div>
@@ -20,7 +20,7 @@ import Footer from "@/components/template/Footer"
 export default {
 	name: "App",
 	components: { Header, Menu, Content, Footer },
-	computed: mapState(['isMenuVisible'])
+	computed: mapState(['isMenuVisible', 'user'])
 }
 </script>
 

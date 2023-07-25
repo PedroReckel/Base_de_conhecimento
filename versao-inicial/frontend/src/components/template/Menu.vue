@@ -33,7 +33,15 @@ export default {
         getTreeData() {
             const url = `${baseApiUrl}/categories/tree`
             return axios.get(url).then(res => res.data)
+        },
+        onNodeSelect(node) {
+            this.$router.push({
+                name: 'articlesByCategory',
+                params: { id: node.id }
+            })
         }
+    }, mounted() {
+        this.$refs.tree.$on('node:selected', this.onNodeSelect) // Para cada nó da arvore vai ser vinculado o evento node:selected. Fazendo isso ele vai adicionar uma nova rota ao nosso router e vai navegar para a categoria correta 
     }
 }
 </script>
