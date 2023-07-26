@@ -4,23 +4,61 @@
 			:hideToggle="!user"
 			:hideUserDropdown="!user"></Header>
 		<Menu v-if="user"></Menu>
-		<Content></Content>
+		<Loading v-if="validatingToken"></Loading> <!-- Se o token não estiver setado será carregado o camponente Loading -->
+		<Content v-else ></Content>
 		<Footer></Footer>
 	</div>
 </template>
 
 <script>
 
+import axios from 'axios'
+import { baseApiUrl, userKey } from '@/global'
 import { mapState } from "vuex"
 import Header from "@/components/template/Header"
 import Menu from "@/components/template/Menu"
 import Content from "@/components/template/Content"
 import Footer from "@/components/template/Footer"
+import Loading from '@/components/template/Loading.vue'
 
 export default {
 	name: "App",
-	components: { Header, Menu, Content, Footer },
-	computed: mapState(['isMenuVisible', 'user'])
+	components: { Header, Menu, Content, Footer, Loading },
+	computed: mapState(['isMenuVisible', 'user']),
+	data: function() {
+		return {
+			validatingToken: true // Dizer se o ele está ou não validando o token
+		}
+	},
+	methods: {
+		async validateToken() {
+			this.validatingToken = true
+
+			const json = localStorage.getItem(userKey) // Pegando o usuário do localStorage
+			const userData = JSON.parse(json)
+			this.$store.commit('setUser', null)
+
+			if(!userData) {
+				this.validatingToken = false
+				this.$router.push({ name: 'auth' })
+				return 
+			}
+
+			const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
+
+			if (res.data) { // Se o token estiver valido
+				this.$store.commit('setUser', userData)
+			} else { // Se o token NÃO estiver valido
+				localStorage.removeItem(userKey)
+				this.$router.push({ name: 'auth' })
+			}
+
+			this.validatingToken = false // Para que não fique validando o token a todo o momento
+		}
+	},
+	mounted() {
+		this.validateToken()
+	}
 }
 </script>
 
