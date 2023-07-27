@@ -5,6 +5,7 @@ module.exports = app => {
     app.post('/singup', app.api.user.save)
     app.post('/singin', app.api.auth.singin)
     app.post('/validateToken', app.api.auth.validateToken)
+    app.post('/validateAdmin', app.api.auth.validateAdmin)
 
     app.route('/users')
         .all(app.config.passport.authenticate()) // A partir de todas as requisições do HTTP todos vão passar por esse filtro

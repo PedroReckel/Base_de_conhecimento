@@ -50,5 +50,24 @@ module.exports = app => {
         res.send(false)
     }
 
-    return { singin, validateToken }
+    // Validação de usuário admin no backend
+    const validateAdmin = async (req, res) => {
+        const userData = req.body || null
+        try {
+            const token = jwt.decode(userData.token, authSecret)
+            const user = await app.db('users')
+                .where({ email: token.email})
+                .whereNull('deletedAt')
+                .first()
+            if(user.admin && token.admin){
+                return res.send(true)
+            }
+        } catch(e) {
+            res.status(401).send('Você não tem permissão para acessar esta página!')
+        }
+        
+        return res.send(false)
+    }
+ 
+    return { singin, validateToken, validateAdmin }
 }

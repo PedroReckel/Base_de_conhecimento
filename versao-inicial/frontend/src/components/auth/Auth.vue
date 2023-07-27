@@ -70,6 +70,7 @@ export default {
         width: 350px;
         padding: 35px;
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
 
         display: flex;
         flex-direction: column;
@@ -107,5 +108,9 @@ export default {
         width: 100%;
         height: 1px;
         background-image: linear-gradient(to right, rgba(120, 120, 120, 0), rgba(120, 120, 120, 0,75), rgba(120, 120, 120, 0));
+    }
+
+    .auth-modal button {
+        border-radius: 5px;
     }
 </style>
