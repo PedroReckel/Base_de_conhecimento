@@ -48,6 +48,10 @@ export default {
 
 			if (res.data) { // Se o token estiver valido
 				this.$store.commit('setUser', userData)
+
+				if(this.$mq === 'xs' || this.$mq === 'sm') {
+                	this.$store.commit('toggleMenu', false)
+            }
 			} else { // Se o token NÃO estiver valido
 				localStorage.removeItem(userKey)
 				this.$router.push({ name: 'auth' })

@@ -3,7 +3,7 @@ const jwt = require('jwt-simple') // JWT (JSON Web Token) é um padrão de token
 const bcrypt = require('bcrypt-nodejs')
 
 module.exports = app => {
-    const singin = async (req, res) => {
+    const signin = async (req, res) => {
         if(!req.body.email || !req.body.password) {
             return res.status(400).send('Usuário não encontrado!')
         }
@@ -69,5 +69,5 @@ module.exports = app => {
         return res.send(false)
     }
  
-    return { singin, validateToken, validateAdmin }
+    return { signin, validateToken, validateAdmin }
 }

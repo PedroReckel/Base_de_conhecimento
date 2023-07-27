@@ -39,6 +39,10 @@ export default {
                 name: 'articlesByCategory',
                 params: { id: node.id }
             })
+
+            if(this.$mq === 'xs' || this.$mq === 'sm') {
+                this.$store.commit('toggleMenu', false)
+            }
         }
     }, mounted() {
         this.$refs.tree.$on('node:selected', this.onNodeSelect) // Para cada nó da arvore vai ser vinculado o evento node:selected. Fazendo isso ele vai adicionar uma nova rota ao nosso router e vai navegar para a categoria correta 

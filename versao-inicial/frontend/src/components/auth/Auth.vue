@@ -11,7 +11,7 @@
             <input v-if="showSignup" v-model="user.confirmPassword" type="password" placeholder="Confirme a Senha:">
 
             <button v-if="showSignup" @click="singup">Registrar</button>
-            <button v-else @click="singin">Entrar</button>
+            <button v-else @click="signin">Entrar</button>
 
             <a href @click.prevent="showSignup = !showSignup">
                 <span v-if="showSignup">Já tem cadastro? Acesse o Login!</span>
@@ -35,8 +35,8 @@ export default {
         }
     },
     methods: {
-        singin() {
-            axios.post(`${baseApiUrl}/singin`, this.user)
+        signin() {
+            axios.post(`${baseApiUrl}/signin`, this.user)
                 .then(res => {
                     this.$store.commit('setUser', res.data) 
                     localStorage.setItem(userKey, JSON.stringify(res.data)) // Guardar no local storage as informações do usuário
