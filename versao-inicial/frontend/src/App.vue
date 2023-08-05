@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="{'hide-menu': !isMenuVisible || !user}"> <!-- Se o menu não estiver visivel ou se o usuário não estiver setado eu vou aplicar essa classe CSS -->
-		<Header title="Grupo SEI - Base de Conhecimento" 
+		<Header title="Upsilon - Base de Conhecimento" 
 			:hideToggle="!user"
 			:hideUserDropdown="!user"></Header>
 		<Menu v-if="user"></Menu>

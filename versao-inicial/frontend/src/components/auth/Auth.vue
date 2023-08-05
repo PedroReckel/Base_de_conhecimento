@@ -1,7 +1,7 @@
 <template>
     <div class="auth-content">
         <div class="auth-modal">
-            <img src="@/assets/logoSei.png" width="200" alt="Logo">
+            <img src="../../assets/logoUpsilion.jpg" width="200" alt="Logo">
             <hr>
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
 

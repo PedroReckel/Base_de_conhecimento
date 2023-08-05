@@ -1,7 +1,7 @@
 const admin = require('./admin')
 
 module.exports = app => {
-    // Essas 3 URL's abaixo são as unicas que são publicas
+    // Essas 4 URL's abaixo são as unicas que são publicas
     app.post('/singup', app.api.user.save)
     app.post('/signin', app.api.auth.signin)
     app.post('/validateToken', app.api.auth.validateToken)
