@@ -50,7 +50,7 @@ export default {
 				this.$store.commit('setUser', userData)
 
 				if(this.$mq === 'xs' || this.$mq === 'sm') {
-                	this.$store.commit('toggleMenu', false)
+                this.$store.commit('toggleMenu', false)
             }
 			} else { // Se o token NÃO estiver valido
 				localStorage.removeItem(userKey)
